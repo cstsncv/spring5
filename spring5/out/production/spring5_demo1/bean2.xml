@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- 集合类型属性注入-->
+    <bean id="stu" class="com.daimler.spring5_demo2.collectiontype.Stu">
+        <!--1. 数组类型属性注入-->
+        <property name="courses">
+            <array>
+                <value>Java课程</value>
+                <value>Python课程</value>
+            </array>
+        </property>
+
+        <!--2. 数组类型属性注入-->
+        <property name="list">
+            <list>
+                <value>王钢蛋</value>
+                <value>李铁锤</value>
+            </list>
+        </property>
+
+        <!--3. 数组类型属性注入-->
+        <property name="maps">
+            <map>
+                <entry key="JAVA" value="jav"></entry>
+                <entry key="PYTHON" value="python"></entry>
+            </map>
+        </property>
+
+        <!--4. 数组类型属性注入-->
+        <property name="sets">
+            <set>
+                <value>Redis</value>
+                <value>PostgreSQL</value>
+            </set>
+        </property>
+
+        <!--4. List对象类型属性注入-->
+        <property name="courseList">
+            <list>
+                <ref bean="course1"></ref>
+                <ref bean="course2"></ref>
+                <ref bean="course3"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <!--创建多个course对象-->
+    <bean id="course1" class="com.daimler.spring5_demo2.collectiontype.Course">
+        <property name="cname" value="Spring5框架"></property>
+    </bean>
+
+    <bean id="course2" class="com.daimler.spring5_demo2.collectiontype.Course">
+        <property name="cname" value="Mybatis框架"></property>
+    </bean>
+    <bean id="course3" class="com.daimler.spring5_demo2.collectiontype.Course">
+        <property name="cname" value="SpringMVC框架"></property>
+    </bean>
+
+
+    <!--把集合注入部分提取出来
+    1. 在spring配置文件中引入名称空间util
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    2. 使用util标签完成list集合注入提取
+    -->
+
+    <!--2.1 提取list集合类型属性注入-->
+    <util:list id="bookList">
+        <value>易筋经</value>
+        <value>九阴真经</value>
+        <value>九阳神功</value>
+    </util:list>
+    <!--2.2 提取list集合类型属性注入使用,
+    scope="singleton"单实例(默认),  scope="prototype"多实例
+    singleton 和 prototype区别
+    1. 单实例 多实例
+    2. singleton 时, 加载spring配置文件时候就会创建单实例对象
+       prototype 时, 加载spring配置文件时候不会创建实例对象, 在调用getBean()方法时候创建多实例对象
+    -->
+    <bean id="book" class="com.daimler.spring5_demo2.collectiontype.Book" scope="prototype">
+        <property name="books" ref="bookList"></property>
+    </bean>
+
+    <bean id="myBean" class="com.daimler.spring5_demo2.factorybean.MyBean"></bean>
+
+    <bean id="orders" class="com.daimler.spring5_demo2.lifecycle.Orders" init-method="initMethod" destroy-method="destroyMethod">
+        <property name="oname" value="手机"></property>
+    </bean>
+
+<!--    配置后置处理器 会为当前所有bean生效-->
+    <bean id="myBeanPost" class="com.daimler.spring5_demo2.lifecycle.MyBeanPost"></bean>
+
+<!--实现自动装配
+    bean标签属性autowire,配置自动装配
+    autowire属性常用两个值:
+        byName根据属性名称注入: 注入值bean的id值和属性名称一样
+        byType根据属性类型注入
+-->
+<!--    <bean id="emp" class="com.daimler.spring5_demo2.autowire.Emp" autowire="byName">-->
+    <bean id="emp" class="com.daimler.spring5_demo2.autowire.Emp" autowire="byType">
+<!--        <property name="dept" ref="dept"></property>-->
+    </bean>
+    <bean id="dept" class="com.daimler.spring5_demo2.autowire.Dept"></bean>
+
+</beans>

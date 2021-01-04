@@ -2,8 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 集合类型属性注入-->
     <bean id="stu" class="com.daimler.spring5_demo2.collectiontype.Stu">
@@ -109,4 +111,26 @@
     </bean>
     <bean id="dept" class="com.daimler.spring5_demo2.autowire.Dept"></bean>
 
+<!--    直接配置德鲁伊连接池-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/userDb"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="root"></property>
+    </bean>
+
+<!--    引入外部属性文件配置数据库连接池
+        1. 创建外部属性文件, properties格式文件, 写数据库信息jdbc.properties
+        2.把外部properties属性文件引入到spring配置文件中
+            2.1 引入context 名称空间
+            2.2 在spring配置文件使用标签引入外部配置文件
+-->
+<!--    引入外部属性文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <bean id="dataSource1" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${prop.driverClass}"></property>
+        <property name="url" value="${prop.url}"></property>
+        <property name="username" value="${prop.userName}"></property>
+        <property name="password" value="${prop.password}"></property>
+    </bean>
 </beans>

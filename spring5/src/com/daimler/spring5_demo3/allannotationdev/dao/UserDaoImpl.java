@@ -1,4 +1,4 @@
-package com.daimler.spring5_demo3.dao;
+package com.daimler.spring5_demo3.allannotationdev.dao;
 
 import org.springframework.stereotype.Repository;
 
@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 public class UserDaoImpl implements UserDao {
     @Override
     public void add() {
-        System.out.println("Dao UserDaoImpl add........");
+        System.out.println("allannotationdev Dao UserDaoImpl add........");
     }
 }

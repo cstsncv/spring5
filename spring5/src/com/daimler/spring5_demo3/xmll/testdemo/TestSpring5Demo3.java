@@ -1,6 +1,6 @@
-package com.daimler.spring5_demo3.testdemo;
+package com.daimler.spring5_demo3.xmll.testdemo;
 
-import com.daimler.spring5_demo3.service.UserService;
+import com.daimler.spring5_demo3.xmll.service.UserService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -1,8 +1,7 @@
-package com.daimler.spring5_demo3.service;
+package com.daimler.spring5_demo3.allannotationconfig.service;
 
-import com.daimler.spring5_demo3.dao.UserDao;
+import com.daimler.spring5_demo3.allannotationconfig.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /** 基于注解方式实现对象创建
@@ -39,7 +38,7 @@ public class UserService {
     private UserDao userDao;
 
     public void add(){
-        System.out.println("Service add.......");
+        System.out.println("allannotationconfig Service add.......");
         userDao.add();
     }
 }

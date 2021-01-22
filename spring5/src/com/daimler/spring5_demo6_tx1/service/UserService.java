@@ -3,6 +3,7 @@ package com.daimler.spring5_demo6_tx1.service;
 import com.daimler.spring5_demo6_tx1.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -13,7 +14,7 @@ public class UserService {
     private UserDao userDao;
 
     // 转账方法
-    @Transactional // 事务注解
+    @Transactional(propagation = Propagation.REQUIRED) // 事务注解
     public void accountMoney(){
 
         // 编程方法
@@ -27,6 +28,7 @@ public class UserService {
 //
 //            //模拟异常
             int i = 1/0;
+
 //            // mary多100
             userDao.addMoney();
 //

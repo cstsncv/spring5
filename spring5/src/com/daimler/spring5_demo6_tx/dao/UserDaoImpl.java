@@ -1,4 +1,4 @@
-package com.daimler.spring5_demo6_tx1.dao;
+package com.daimler.spring5_demo6_tx.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

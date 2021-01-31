@@ -1,4 +1,4 @@
-package com.daimler.spring5_demo6_tx1.dao;
+package com.daimler.spring5_demo6_tx.dao;
 
 public interface UserDao {
     // 多钱方法

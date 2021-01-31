@@ -1,8 +1,9 @@
-package com.daimler.spring5_demo6_tx1.service;
+package com.daimler.spring5_demo6_tx.service;
 
-import com.daimler.spring5_demo6_tx1.dao.UserDao;
+import com.daimler.spring5_demo6_tx.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +15,7 @@ public class UserService {
     private UserDao userDao;
 
     // 转账方法
-    @Transactional(propagation = Propagation.REQUIRED) // 事务注解
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ, timeout = 10) // 事务注解, 事务传播行为及隔离级别
     public void accountMoney(){
 
         // 编程方法
